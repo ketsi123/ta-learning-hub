@@ -30,3 +30,9 @@ dialog#ta-notification::backdrop{background:rgba(18,40,45,.38);backdrop-filter:b
 #ta-notification small:empty{display:none}
 @media(max-width:480px){dialog#ta-notification{padding:25px 20px 20px;border-radius:18px;}#ta-notification h2{font-size:21px;}}
 @media print{dialog#ta-notification{display:none!important}dialog#ta-notification::backdrop{background:transparent}}
+
+/* Literal source comments may include multiple lines; never render them as HTML. */
+.source-note-text{white-space:pre-wrap;overflow-wrap:anywhere}
+.source-note-field textarea{width:100%;min-height:90px;resize:vertical;box-sizing:border-box;font:inherit;color:inherit;background:#fff;border:1px solid #dce3e6;border-radius:6px;padding:10px 12px}
+.source-note-field textarea:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.hub-skill-card .skill-copy>strong{overflow-wrap:anywhere}
