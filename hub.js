@@ -8,9 +8,19 @@ let hubFocus=null,hubStatus='pending',hubPage=0,hubDrillSearch='',hubDomain='cor
 const hubLegacyRender=renderContent,hubLegacyExport=exportData;
 const hubGraphic=(i,cls='')=>`<span aria-hidden="true" class="hub-graphic ${cls}" style="--sprite-x:${(i%3)*50}%;--sprite-y:${Math.floor(i/3)*100}%"></span>`;
 // Each different content topic owns a distinct 3D illustration.
-const HUB_ART = Object.freeze({overview:[0,1,2,3],followup:[4,5,6,7],upskill:[8,9,10,11,12,13],help:14,priority:15,group:[16,17,18],reports:[19,20,21,22]});
+const HUB_ART = Object.freeze({overview:[0,1,2,3],followup:[4,5,6,7],upskill:[8,9,10,11,12,13,'excel-advanced','excel-ai'],help:14,priority:15,group:[16,17,18],reports:[19,20,21,22]});
 const hubTopicGraphic=(i,cls='')=>`<span aria-hidden="true" data-art-topic="${i}" class="hub-graphic hub-topic-graphic ${cls}" style="--sprite-x:${(i%5)*25}%;--sprite-y:${Math.floor(i/5)*25}%"></span>`;
-const hubSkillGraphic=(kind,i)=>kind==='up'?hubTopicGraphic(HUB_ART.upskill[i%HUB_ART.upskill.length]):hubGraphic(i);
+// Dedicated spreadsheet illustrations: never cycle new courses onto laboratory artwork.
+const HUB_EXCEL_ART=Object.freeze({
+ 'excel-advanced':`<ellipse cx="49" cy="83" rx="34" ry="6" fill="#d6e7df"/><path d="M31 14 79 10 86 17 86 73 38 81 31 74Z" fill="#0b744b"/><path d="M31 14 79 10 79 67 31 74Z" fill="#25a76b"/><path d="M38 24 72 21 72 61 38 66Z" fill="#effff5"/><path d="m38 34 34-3M38 44l34-4M38 55l34-5M49 23v41M61 22v40" stroke="#8ed0ab" stroke-width="2"/><path d="m39 25 32-3v8l-32 4Z" fill="#8bddae"/><path d="m48 49 8-7 7 4 7-10" fill="none" stroke="#188953" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 43 47 39 53 45 53 77 19 82 13 76Z" fill="#08613e"/><path d="M13 43 47 39 47 72 13 77Z" fill="#168a54"/><text x="18" y="66" fill="white" font-size="23" font-weight="700" font-family="Georgia,serif" font-style="italic">fx</text>`,
+ 'excel-ai':`<ellipse cx="49" cy="83" rx="35" ry="6" fill="#dce5ed"/><path d="m14 31 43-5 5 5v47l-34 4-14-7Z" fill="#087a54"/><path d="m14 31 34-4v47l-34 4Z" fill="#27a673"/><path d="m20 42 22-3v27l-22 3Z" fill="#ecfff6"/><path d="m20 50 22-3m-22 12 22-3M31 40v28" stroke="#9bd7ba" stroke-width="2"/><path d="M54 29v-8" stroke="#8084bb" stroke-width="4"/><circle cx="54" cy="18" r="5" fill="#a88bf0"/><rect x="37" y="31" width="45" height="38" rx="13" fill="#7778ad"/><rect x="33" y="27" width="45" height="38" rx="13" fill="#ddd9fa"/><rect x="39" y="36" width="33" height="19" rx="7" fill="#454572"/><circle cx="48" cy="44" r="3" fill="#8ef1d8"/><circle cx="63" cy="44" r="3" fill="#8ef1d8"/><path d="M50 57h12" stroke="#9993c8" stroke-width="3" stroke-linecap="round"/><path d="m83 13 3 7 7 3-7 3-3 7-3-7-7-3 7-3Z" fill="#b496f4"/>`
+});
+function hubCourseGraphic(key,i){
+ if(typeof key==='number')return hubTopicGraphic(key);
+ const art=HUB_EXCEL_ART[key];
+ return `<span aria-hidden="true" data-art-topic="${esc(key||'course-'+(i+1))}" class="hub-graphic hub-course-graphic" style="background-image:none"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%" focusable="false">${art||`<rect x="18" y="12" width="65" height="76" rx="14" fill="#d8e6ef"/><text x="50" y="60" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#416b84">${i+1}</text>`}</svg></span>`;
+}
+const hubSkillGraphic=(kind,i)=>kind==='up'?hubCourseGraphic(HUB_ART.upskill[i],i):hubGraphic(i);
 
 function hubPlan(v){const p=parseStatus(v);return !done(v)&&p.plan&&(!p.year||p.year<=+year);}
 function hubSkillPeople(kind,index){const arr=selectData(kind==='up'?ups:records);return arr.map(e=>{const a=evaluate(e),required=kind==='up'?(!!String(e.cells[index]||'').trim()&&(!parseStatus(e.cells[index]).year||parseStatus(e.cells[index]).year<=+year)):a.req.includes(index+1),complete=done(e.cells[index]),planned=hubPlan(e.cells[index]);return{e,required,complete,planned,kind:kind==='up'?'Upskilling':a.must.includes(index+1)?'Must Have':a.should.includes(index+1)?'Should Have':'เสริมทักษะ'};});}
