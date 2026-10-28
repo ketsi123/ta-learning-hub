@@ -36,3 +36,22 @@ dialog#ta-notification::backdrop{background:rgba(18,40,45,.38);backdrop-filter:b
 .source-note-field textarea{width:100%;min-height:90px;resize:vertical;box-sizing:border-box;font:inherit;color:inherit;background:#fff;border:1px solid #dce3e6;border-radius:6px;padding:10px 12px}
 .source-note-field textarea:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 .hub-skill-card .skill-copy>strong{overflow-wrap:anywhere}
+
+/* Required-skill gap detail: read-only, existing matrix and year rules unchanged. */
+#content .fu-results-table{width:100%;min-width:1180px;table-layout:fixed}
+#content .fu-results-table th,#content .fu-results-table td{white-space:normal;overflow-wrap:anywhere;vertical-align:top;padding:15px 12px;line-height:1.5}
+#content .fu-people-table th:nth-child(1){width:13%}#content .fu-people-table th:nth-child(2){width:8%}#content .fu-people-table th:nth-child(3){width:5%}#content .fu-people-table th:nth-child(4){width:15%}#content .fu-people-table th:nth-child(5){width:9%}#content .fu-people-table th:nth-child(6){width:5%}#content .fu-people-table th:nth-child(7){width:29%}#content .fu-people-table th:nth-child(8){width:16%}
+#content .fu-item-table th:nth-child(4){width:20%}#content .fu-item-table th:nth-child(5){width:25%}#content .fu-item-table th:nth-child(7){width:23%}
+.fu-missing-list{list-style:none;padding:0;margin:0;display:grid;gap:10px}.fu-missing-list li+li{padding-top:9px;border-top:1px solid #e6eeeb}
+#content .fu-skill-open,#content .fu-summary-open{display:block;width:100%;border:0;background:transparent;text-align:left;padding:0;font:inherit;line-height:1.5;color:#385365;white-space:normal}
+.fu-skill-open strong{display:block;font-weight:650;font-size:15px}.fu-item-status{display:block;margin-top:3px;font-size:14px;color:#99501e}.fu-item-status.planned{color:#3d6099}.fu-item-status.future{color:#77509c}
+#content .fu-summary-open{font-size:14px}#content .fu-detail-open{margin-top:9px;font-size:14px}#content .fu-gap-count{min-width:36px;padding:5px 10px;border:1px solid #ebd2b5;border-radius:8px;background:#fff4e5;color:#91501f;font:inherit;font-weight:700}
+#content button.fu-status{border:0;font:inherit;text-align:left;white-space:normal;font-size:14px;line-height:1.5}#content .fu-skill-open:hover strong,#content .fu-summary-open:hover{text-decoration:underline;text-underline-offset:3px}
+.fu-status.future{background:#f0e9f8;color:#77509c}.fu-status.done{background:#e7f4ec;color:#256a4b}.fu-no-rule{font-size:14px;color:#526b61}
+[data-fu-person]:focus-visible{outline:2px solid #487fa4;outline-offset:4px;border-radius:4px}
+dialog:has(.fu-detail-body){position:fixed;inset:0;margin:auto;width:min(900px,94vw);max-height:90dvh;overflow:auto}
+.fu-detail-context{padding:15px 18px;border:1px solid #dbe9e3;background:#f4f9f6;border-radius:12px}.fu-detail-context h3{margin:0 0 7px;font-size:20px;color:#254f4c}.fu-detail-context p{margin:4px 0;color:#52646b;line-height:1.6}
+.fu-detail-list{list-style:none;margin:18px 0;padding:0;display:grid;gap:12px}.fu-detail-list li{padding:16px;border:1px solid #e1e8e4;border-radius:12px}.fu-detail-list li>div{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:9px}.fu-detail-list strong{font-size:17px;color:#2e505b}.fu-requirement{font-size:13px;font-weight:650;color:#657669}.fu-detail-list .fu-status{font-size:14px;line-height:1.5}.fu-source{display:block;margin-top:9px;color:#64716c;white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}
+.fu-requirements{border-top:1px solid #e5ece7;padding-top:14px;margin-top:15px;color:#47665e}.fu-requirements summary{cursor:pointer;font-weight:600}.fu-requirements ul{padding-left:22px;line-height:1.7;font-size:14px}.fu-requirements li+li{margin-top:7px}
+.ut-sort-actions{display:flex;gap:7px;margin:10px 0}.ut-popup .ut-sort-actions button{flex:1;border:1px solid #cdded6;background:#f5f9f6;color:#345e50;border-radius:7px;padding:7px 5px;font:inherit;font-size:12px;min-height:40px;justify-content:center;box-shadow:none;cursor:pointer}.ut-popup .ut-sort-actions button:hover{background:#e6f2eb}
+@media(max-width:650px){.fu-detail-list strong{font-size:16px}.fu-detail-context h3{font-size:18px}.fu-detail-list li{padding:12px}}
